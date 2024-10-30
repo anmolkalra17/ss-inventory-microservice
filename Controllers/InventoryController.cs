@@ -51,7 +51,7 @@ namespace ss_inventory_microservice.Controllers
 				return NotFound();
 			}
 			await _repository.UpdateAsync(id, item);
-			return NoContent();
+			return Ok(new { message = "Item updated successfully" });
 		}
 
 		[HttpDelete("{id}")]
@@ -63,7 +63,7 @@ namespace ss_inventory_microservice.Controllers
 				return NotFound();
 			}
 			await _repository.DeleteAsync(id);
-			return NoContent();
+			return Ok(new { message = "Item deleted successfully" });
 		}
 	}
 }
