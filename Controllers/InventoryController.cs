@@ -9,24 +9,24 @@ namespace ss_inventory_microservice.Controllers
 	[ApiController]
 	public class InventoryController : ControllerBase
 	{
-		private readonly InventoryRepository _repository;
+		private readonly InventoryRepository _repo;
 
-		public InventoryController(InventoryRepository repository)
+		public InventoryController(InventoryRepository repo)
 		{
-			_repository = repository;
+			_repo = repo;
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> Get()
 		{
-			var items = await _repository.GetAllAsync();
+			var items = await _repo.GetAllAsync();
 			return Ok(items);
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> Get(string id)
 		{
-			var item = await _repository.GetByIdAsync(id);
+			var item = await _repo.GetByIdAsync(id);
 			if (item == null)
 			{
 				return NotFound();
@@ -38,31 +38,31 @@ namespace ss_inventory_microservice.Controllers
 		public async Task<IActionResult> Post([FromBody] InventoryItem item)
 		{
             string Id = ObjectId.GenerateNewId().ToString();
-			await _repository.CreateAsync(item);
+			await _repo.CreateAsync(item);
 			return CreatedAtAction(nameof(Get), new { id = Id }, item);
 		}
 
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Put(string id, [FromBody] InventoryItem item)
 		{
-			var existingItem = await _repository.GetByIdAsync(id);
+			var existingItem = await _repo.GetByIdAsync(id);
 			if (existingItem == null)
 			{
 				return NotFound();
 			}
-			await _repository.UpdateAsync(id, item);
+			await _repo.UpdateAsync(id, item);
 			return Ok(new { message = "Item updated successfully" });
 		}
 
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(string id)
 		{
-			var existingItem = await _repository.GetByIdAsync(id);
+			var existingItem = await _repo.GetByIdAsync(id);
 			if (existingItem == null)
 			{
 				return NotFound();
 			}
-			await _repository.DeleteAsync(id);
+			await _repo.DeleteAsync(id);
 			return Ok(new { message = "Item deleted successfully" });
 		}
 	}
