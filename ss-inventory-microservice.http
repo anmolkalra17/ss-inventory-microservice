@@ -1,0 +1,6 @@
+@ss_inventory_microservice_HostAddress = http://localhost:5081
+
+GET {{ss_inventory_microservice_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
