@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ss-inventory-microservice", "ss-inventory-microservice.csproj", "{67C435FC-69A0-4ED7-9B5A-F3F27932E5C9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67C435FC-69A0-4ED7-9B5A-F3F27932E5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C435FC-69A0-4ED7-9B5A-F3F27932E5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C435FC-69A0-4ED7-9B5A-F3F27932E5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C435FC-69A0-4ED7-9B5A-F3F27932E5C9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF8CE3CD-527A-462C-AEDE-24676BEF3632}
+	EndGlobalSection
+EndGlobal

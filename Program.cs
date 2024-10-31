@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient<ServiceAdapter>(client =>
 {
     //  Other microservice URL
-    client.BaseAddress = new Uri("https://other-microservice-url.com/");
+    client.BaseAddress = new Uri(Environment.GetEnvironmentVariable("SERVICE_URL") ?? string.Empty);
 });
 
 var app = builder.Build();
