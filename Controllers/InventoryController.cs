@@ -5,7 +5,7 @@ using MongoDB.Bson;
 
 namespace ss_inventory_microservice.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/[controller]/products")]
 	[ApiController]
 	public class InventoryController : ControllerBase
 	{
