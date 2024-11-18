@@ -1,22 +1,28 @@
 using ss_inventory_microservice.Data;
 using ss_inventory_microservice.Repositories;
 using MongoDB.Driver;
+using ss_inventory_microservice;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// MongoDB Connection
 var mongoConnectionString = builder.Configuration.GetConnectionString("MongoDb");
 builder.Services.AddSingleton<IMongoClient, MongoClient>(sp => new MongoClient(mongoConnectionString));
 builder.Services.AddSingleton<MongoDbContext>();
-builder.Services.AddScoped<InventoryRepository>();
 
+// RabbitMQ Connection
+builder.Services.AddScoped<InventoryRepository>();
+builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
+builder.Services.AddHostedService<OrderReceivedConsumer>();
+
+// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Add swagger documentation for Development environment
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

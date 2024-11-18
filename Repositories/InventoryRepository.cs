@@ -4,7 +4,12 @@ using MongoDB.Driver;
 
 namespace ss_inventory_microservice.Repositories
 {
-    public class InventoryRepository
+    public interface IInventoryRepository
+    {
+        Task<InventoryItem> GetItemByIdAsync(string id);
+        Task UpdateItemQuantityAsync(InventoryItem item);
+    }
+    public class InventoryRepository : IInventoryRepository
     {
         private readonly MongoDbContext _ctx;
 
@@ -37,5 +42,21 @@ namespace ss_inventory_microservice.Repositories
         {
             await _ctx.InventoryItems.DeleteOneAsync(item => item.Id == id);
         }
+
+        public async Task<InventoryItem> GetItemByIdAsync(string id)
+        {
+            return await _ctx.InventoryItems.Find(item => item.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateItemQuantityAsync(InventoryItem item)
+        {
+            await _ctx.InventoryItems.ReplaceOneAsync(i => i.Id == item.Id, item);
+        }
+    }
+
+    public class OrderMessage
+    {
+        public string? ProductId { get; set; }
+        public int Quantity { get; set; }
     }
 }
