@@ -67,3 +67,10 @@ host = localhost:{port}
 
 ## Docker Image URL
 This micro service has been containerized and the docker image url can be found [here](https://hub.docker.com/r/itsmeakay/ss-microservice-inventory).
+
+## Messaging with RabbitMQ
+The service consumes messages from a message queue using the RabbitMQ client. Messages received are in the following example format:
+
+```{"ProductId":"6721d5534e7be3e5f0c1b1a2","Quantity":1}```
+
+Upon consuming this message, the micro service updates the quantity of the item that is remaining in the stock.
