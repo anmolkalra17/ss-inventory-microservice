@@ -38,7 +38,7 @@ dotnet run
 
 This micro service has the following endpoints:
 
-host = localhost:<port>
+host = localhost:{port}
 
 1. ```GET host/api/inventory/products```: Returns back all the products in the inventory database
 2. ```POST host/api/inventory/products```: Add a new product in the inventory database
