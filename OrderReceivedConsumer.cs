@@ -25,9 +25,14 @@ public class OrderReceivedConsumer : BackgroundService
             Password = "guest"
         };
 
-        _connection = factory.CreateConnection();
-        _channel = _connection.CreateModel();
-        _channel.QueueDeclare(queue: "product_queue", durable: false, exclusive: false, autoDelete: false, arguments: null);
+        try {
+            _connection = factory.CreateConnection();
+            _channel = _connection.CreateModel();
+            _channel.QueueDeclare(queue: "product_queue", durable: false, exclusive: false, autoDelete: false, arguments: null);
+        } catch (Exception ex) {
+            Console.WriteLine(ex.Message);
+            Console.WriteLine("Please make sure that RabbitMQ is running.");
+        }
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
