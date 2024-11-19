@@ -27,7 +27,7 @@ public class OrderReceivedConsumer : BackgroundService
 
         _connection = factory.CreateConnection();
         _channel = _connection.CreateModel();
-        _channel.QueueDeclare(queue: "orderQueue", durable: false, exclusive: false, autoDelete: false, arguments: null);
+        _channel.QueueDeclare(queue: "product_queue", durable: false, exclusive: false, autoDelete: false, arguments: null);
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -40,7 +40,7 @@ public class OrderReceivedConsumer : BackgroundService
             await ProcessMessage(message);
         };
 
-        _channel.BasicConsume(queue: "orderQueue", autoAck: true, consumer: consumer);
+        _channel.BasicConsume(queue: "product_queue", autoAck: true, consumer: consumer);
 
         return Task.CompletedTask;
     }
