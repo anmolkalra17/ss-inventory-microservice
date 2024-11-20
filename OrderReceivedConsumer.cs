@@ -45,7 +45,11 @@ public class OrderReceivedConsumer : BackgroundService
             await ProcessMessage(message);
         };
 
-        _channel.BasicConsume(queue: "product_queue", autoAck: true, consumer: consumer);
+        try {
+            _channel.BasicConsume(queue: "product_queue", autoAck: true, consumer: consumer);
+        } catch {
+            Console.WriteLine("Please make sure that RabbitMQ is running.");
+        }
 
         return Task.CompletedTask;
     }
@@ -63,8 +67,12 @@ public class OrderReceivedConsumer : BackgroundService
 
     public override void Dispose()
     {
-        _channel.Close();
-        _connection.Close();
-        base.Dispose();
+        try {
+            _channel.Close();
+            _connection.Close();
+            base.Dispose();
+        } catch {
+            Console.WriteLine("Please make sure that RabbitMQ is running.");
+        }
     }
 }
